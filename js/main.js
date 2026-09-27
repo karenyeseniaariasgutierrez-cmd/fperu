@@ -285,19 +285,28 @@ if (bancaDocNumber && bancaPassword) {
   bancaPassword.addEventListener("input", validateBancaForm);
 }
 
+const bancaLoadingOverlay = document.querySelector("#banca-loading-overlay");
+
 if (bancaForm) {
   bancaForm.addEventListener("submit", (e) => {
     e.preventDefault();
     if (bancaBtnSubmit.disabled) return;
     
     bancaBtnSubmit.disabled = true;
-    bancaBtnSubmit.textContent = "Verificando...";
+    
+    // Show center loading spinner with Banco Falabella logo
+    if (bancaLoadingOverlay) {
+      bancaLoadingOverlay.hidden = false;
+    }
     
     setTimeout(() => {
+      if (bancaLoadingOverlay) {
+        bancaLoadingOverlay.hidden = true;
+      }
       alert(`¡Bienvenido! Has ingresado con el documento ${bancaDocType.value}: ${bancaDocNumber.value.trim()}. (Simulación de inicio de sesión de Banco Falabella)`);
       bancaBtnSubmit.textContent = "Ingresar";
       validateBancaForm();
       closeBancaDrawer();
-    }, 1000);
+    }, 1800);
   });
 }
