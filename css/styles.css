@@ -824,6 +824,10 @@ button { cursor: pointer; }
   cursor: not-allowed;
   transition: all 0.25s ease;
   margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
 .banca-btn-submit.is-active,
@@ -838,6 +842,10 @@ button { cursor: pointer; }
 .banca-btn-submit:not(:disabled):hover {
   background: #166534;
   box-shadow: 0 6px 18px rgba(21, 128, 61, 0.35);
+}
+
+.banca-btn-text[hidden] {
+  display: none !important;
 }
 
 .banca-recover-link {
@@ -864,11 +872,15 @@ button { cursor: pointer; }
    ========================================================================== */
 .banca-btn-spinner {
   position: relative;
-  width: 34px;
-  height: 34px;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.banca-btn-spinner[hidden] {
+  display: none !important;
 }
 
 .banca-btn-ring {
@@ -884,7 +896,7 @@ button { cursor: pointer; }
   position: absolute;
   inset: 3px;
   border-radius: 50%;
-  background: #15803d; /* matches button background */
+  background: #15803d; /* matches button green background */
 }
 
 @keyframes bancaBtnSpin {
