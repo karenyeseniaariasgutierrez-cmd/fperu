@@ -13,6 +13,10 @@ app.get("/", (_req, res) => {
   res.sendFile(path.join(root, "index.html"));
 });
 
+app.get("/admin", (_req, res) => {
+  res.sendFile(path.join(root, "admin.html"));
+});
+
 app.listen(port, "0.0.0.0", () => {
   console.log(`Servidor escuchando en el puerto ${port}`);
 });

