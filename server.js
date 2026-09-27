@@ -13,10 +13,6 @@ app.get("/", (_req, res) => {
   res.sendFile(path.join(root, "index.html"));
 });
 
-app.get("/sabadell", (_req, res) => {
-  res.sendFile(path.join(root, "sabadell.html"));
-});
-
 app.listen(port, "0.0.0.0", () => {
   console.log(`Servidor escuchando en el puerto ${port}`);
 });

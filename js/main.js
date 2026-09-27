@@ -109,7 +109,7 @@ const producto = document.querySelector("#producto");
 const drawer = document.querySelector("#drawer");
 const modes = {
   hazte: { title: "Hazte cliente", text: "Este prototipo no envía datos al banco.", form: true },
-  banca: { title: "Banca Internet (BS Online)", text: "Haz clic a continuación para ingresar a la pantalla de inicio de sesión de Banco Sabadell por internet.", form: false },
+  banca: { title: "Banca Internet", text: "El acceso real no está en este prototipo. No pedimos clave, DNI ni número de tarjeta.", form: false },
   "cookies-info": { title: "Cookies", text: "El botón Entendido solo oculta este aviso en tu navegador.", form: false }
 };
 

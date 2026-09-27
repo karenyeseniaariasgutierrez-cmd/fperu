@@ -858,23 +858,3 @@ button { cursor: pointer; }
   color: #166534;
   text-decoration: underline;
 }
-
-.banca-extra-access {
-  margin-top: auto;
-  padding-top: 24px;
-  border-top: 1px solid #f1f5f9;
-  text-align: center;
-}
-
-.banca-extra-access small {
-  display: block;
-  font-size: 0.78rem;
-  color: #64748b;
-  margin-bottom: 10px;
-}
-
-.banca-extra-access .btn-soft {
-  width: 100%;
-  font-size: 0.85rem;
-  height: 42px;
-}
