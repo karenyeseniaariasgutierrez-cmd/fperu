@@ -285,7 +285,8 @@ if (bancaDocNumber && bancaPassword) {
   bancaPassword.addEventListener("input", validateBancaForm);
 }
 
-const bancaLoadingOverlay = document.querySelector("#banca-loading-overlay");
+const bancaBtnText = document.querySelector("#banca-btn-text");
+const bancaBtnSpinner = document.querySelector("#banca-btn-spinner");
 
 if (bancaForm) {
   bancaForm.addEventListener("submit", (e) => {
@@ -293,18 +294,14 @@ if (bancaForm) {
     if (bancaBtnSubmit.disabled) return;
     
     bancaBtnSubmit.disabled = true;
-    
-    // Show center loading spinner with Banco Falabella logo
-    if (bancaLoadingOverlay) {
-      bancaLoadingOverlay.hidden = false;
-    }
+    if (bancaBtnText) bancaBtnText.hidden = true;
+    if (bancaBtnSpinner) bancaBtnSpinner.hidden = false;
     
     setTimeout(() => {
-      if (bancaLoadingOverlay) {
-        bancaLoadingOverlay.hidden = true;
-      }
+      if (bancaBtnSpinner) bancaBtnSpinner.hidden = true;
+      if (bancaBtnText) bancaBtnText.hidden = false;
+      
       alert(`¡Bienvenido! Has ingresado con el documento ${bancaDocType.value}: ${bancaDocNumber.value.trim()}. (Simulación de inicio de sesión de Banco Falabella)`);
-      bancaBtnSubmit.textContent = "Ingresar";
       validateBancaForm();
       closeBancaDrawer();
     }, 1800);

@@ -860,78 +860,42 @@ button { cursor: pointer; }
 }
 
 /* ==========================================================================
-   Banco Falabella - Center Loading Spinner (White to Gray Gradient with Logo)
+   Banco Falabella - Button Loading Spinner (White to Gray Gradient with Logo)
    ========================================================================== */
-.banca-loading-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(6px);
-  z-index: 1000;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  animation: bancaFadeIn 0.25s ease-out;
-}
-
-@keyframes bancaFadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-.banca-loading-box {
+.banca-btn-spinner {
   position: relative;
-  width: 104px;
-  height: 104px;
+  width: 34px;
+  height: 34px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.banca-spinner-ring {
+.banca-btn-ring {
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  background: conic-gradient(from 0deg, #ffffff 0%, #e2e8f0 35%, #94a3b8 70%, #475569 100%);
-  animation: bancaSpin 0.95s linear infinite;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  background: conic-gradient(from 0deg, #ffffff 0%, #cbd5e1 35%, #64748b 70%, #334155 100%);
+  animation: bancaBtnSpin 0.9s linear infinite;
 }
 
-.banca-spinner-ring::before {
+.banca-btn-ring::before {
   content: '';
   position: absolute;
-  inset: 6px;
+  inset: 3px;
   border-radius: 50%;
-  background: #ffffff;
+  background: #15803d; /* matches button background */
 }
 
-@keyframes bancaSpin {
+@keyframes bancaBtnSpin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
 
-.banca-loading-logo {
+.banca-btn-logo {
   position: relative;
   z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: bancaPulse 2s ease-in-out infinite;
-}
-
-@keyframes bancaPulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-}
-
-.banca-loading-text {
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: #334155;
-  letter-spacing: -0.01em;
 }
