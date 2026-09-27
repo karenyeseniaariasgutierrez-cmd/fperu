@@ -169,6 +169,16 @@ document.querySelector("#enviar-mensaje").addEventListener("click", () => {
   document.querySelector("#mensaje").value = "";
 });
 
+document.addEventListener("click", (event) => {
+  if (event.target.closest("[data-open='banca']")) return;
+  if (event.target.closest("#overlay, #drawer")) return;
+  const control = event.target.closest("a, button");
+  if (!control) return;
+  if (control.closest(".hero-arrow, .dots, .scroller-wrap") || control.id === "menu-toggle") return;
+  event.preventDefault();
+  event.stopPropagation();
+}, true);
+
 const cookie = document.querySelector("#cookie");
 if (localStorage.getItem("falpe-cookie") === "1") cookie.classList.add("is-hidden");
 document.querySelector("#cookie-ok").addEventListener("click", () => {
