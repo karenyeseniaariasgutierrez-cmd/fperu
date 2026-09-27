@@ -868,43 +868,58 @@ button { cursor: pointer; }
 }
 
 /* ==========================================================================
-   Banco Falabella - Button Loading Spinner (White to Gray Gradient with Logo)
+   Banco Falabella - Center Screen Loading Spinner (White to Gray Gradient with Logo)
    ========================================================================== */
-.banca-btn-spinner {
-  position: relative;
-  width: 32px;
-  height: 32px;
+.banca-loading-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
   display: flex;
   align-items: center;
   justify-content: center;
+  animation: bancaFadeIn 0.25s ease-out;
 }
 
-.banca-btn-spinner[hidden] {
+.banca-loading-overlay[hidden] {
   display: none !important;
 }
 
-.banca-btn-ring {
+.banca-loading-box {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  background: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.banca-spinner-ring {
   position: absolute;
-  inset: 0;
+  inset: -6px;
   border-radius: 50%;
   background: conic-gradient(from 0deg, #ffffff 0%, #cbd5e1 35%, #64748b 70%, #334155 100%);
-  animation: bancaBtnSpin 0.9s linear infinite;
+  animation: bancaSpin 0.9s linear infinite;
 }
 
-.banca-btn-ring::before {
+.banca-spinner-ring::before {
   content: '';
   position: absolute;
-  inset: 3px;
+  inset: 5px;
   border-radius: 50%;
-  background: #15803d; /* matches button green background */
+  background: #ffffff;
 }
 
-@keyframes bancaBtnSpin {
+@keyframes bancaSpin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
 
-.banca-btn-logo {
+.banca-loading-logo {
   position: relative;
   z-index: 2;
   display: flex;
