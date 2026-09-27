@@ -109,7 +109,7 @@ const producto = document.querySelector("#producto");
 const drawer = document.querySelector("#drawer");
 const modes = {
   hazte: { title: "Hazte cliente", text: "Este prototipo no envía datos al banco.", form: true },
-  banca: { title: "Banca Internet", text: "El acceso real no está en este prototipo. No pedimos clave, DNI ni número de tarjeta.", form: false },
+  banca: { title: "Banca Internet (BS Online)", text: "Haz clic a continuación para ingresar a la pantalla de inicio de sesión de Banco Sabadell por internet.", form: false },
   "cookies-info": { title: "Cookies", text: "El botón Entendido solo oculta este aviso en tu navegador.", form: false }
 };
 
@@ -138,6 +138,10 @@ document.querySelectorAll("[data-open]").forEach((trigger) => {
       requestAnimationFrame(() => drawer.classList.add("is-open"));
       return;
     }
+    if (trigger.dataset.open === "banca") {
+      openBancaDrawer();
+      return;
+    }
     openModal(trigger.dataset.open, trigger.dataset.producto);
   });
 });
@@ -148,6 +152,7 @@ document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") {
     closeModal();
     drawer.classList.remove("is-open");
+    if (typeof closeBancaDrawer === "function") closeBancaDrawer();
   }
 });
 document.querySelector("#enviar").addEventListener("click", () => {
@@ -171,7 +176,7 @@ document.querySelector("#enviar-mensaje").addEventListener("click", () => {
 
 document.addEventListener("click", (event) => {
   if (event.target.closest("[data-open='banca']")) return;
-  if (event.target.closest("#overlay, #drawer")) return;
+  if (event.target.closest("#overlay, #drawer, #banca-drawer, #banca-backdrop")) return;
   const control = event.target.closest("a, button");
   if (!control) return;
   if (control.closest(".hero-arrow, .dots, .scroller-wrap") || control.id === "menu-toggle") return;
@@ -185,3 +190,114 @@ document.querySelector("#cookie-ok").addEventListener("click", () => {
   localStorage.setItem("falpe-cookie", "1");
   cookie.classList.add("is-hidden");
 });
+
+// ==========================================================================
+// Banco Falabella "Ingresa a tu cuenta" Side Drawer Logic
+// ==========================================================================
+const bancaDrawer = document.querySelector("#banca-drawer");
+const bancaBackdrop = document.querySelector("#banca-backdrop");
+const bancaCloseBtn = document.querySelector("#banca-drawer-close");
+const bancaDocType = document.querySelector("#banca-doc-type");
+const bancaDocNumber = document.querySelector("#banca-doc-number");
+const bancaPassword = document.querySelector("#banca-password");
+const bancaPassToggle = document.querySelector("#banca-pass-toggle");
+const bancaBtnSubmit = document.querySelector("#banca-btn-submit");
+const bancaEyeSlash = document.querySelector("#banca-eye-slash");
+const bancaForm = document.querySelector("#banca-login-form");
+
+function openBancaDrawer() {
+  if (!bancaDrawer || !bancaBackdrop) return;
+  bancaBackdrop.hidden = false;
+  bancaDrawer.hidden = false;
+  requestAnimationFrame(() => {
+    bancaBackdrop.classList.add("is-open");
+    bancaDrawer.classList.add("is-open");
+    bancaDocNumber?.focus();
+  });
+}
+
+function closeBancaDrawer() {
+  if (!bancaDrawer || !bancaBackdrop) return;
+  bancaBackdrop.classList.remove("is-open");
+  bancaDrawer.classList.remove("is-open");
+  setTimeout(() => {
+    bancaBackdrop.hidden = true;
+    bancaDrawer.hidden = true;
+  }, 320);
+}
+
+if (bancaCloseBtn) {
+  bancaCloseBtn.addEventListener("click", closeBancaDrawer);
+  bancaBackdrop.addEventListener("click", closeBancaDrawer);
+}
+
+// Handle Document Type switching
+if (bancaDocType) {
+  bancaDocType.addEventListener("change", () => {
+    const val = bancaDocType.value;
+    bancaDocNumber.value = "";
+    if (val === "DNI") {
+      bancaDocNumber.placeholder = "DNI";
+      bancaDocNumber.maxLength = 8;
+      bancaDocNumber.inputMode = "numeric";
+    } else if (val === "CE") {
+      bancaDocNumber.placeholder = "Carné de Extranjería";
+      bancaDocNumber.maxLength = 12;
+      bancaDocNumber.inputMode = "text";
+    } else if (val === "Pasaporte") {
+      bancaDocNumber.placeholder = "Número de Pasaporte";
+      bancaDocNumber.maxLength = 12;
+      bancaDocNumber.inputMode = "text";
+    } else if (val === "RUC") {
+      bancaDocNumber.placeholder = "RUC (11 dígitos)";
+      bancaDocNumber.maxLength = 11;
+      bancaDocNumber.inputMode = "numeric";
+    }
+    validateBancaForm();
+  });
+}
+
+// Handle Password Eye Toggle
+if (bancaPassToggle) {
+  bancaPassToggle.addEventListener("click", () => {
+    const isPass = bancaPassword.type === "password";
+    bancaPassword.type = isPass ? "text" : "password";
+    if (bancaEyeSlash) {
+      bancaEyeSlash.style.display = isPass ? "none" : "block";
+    }
+  });
+}
+
+// Form validation: Enable submit button when fields are valid
+function validateBancaForm() {
+  if (!bancaDocNumber || !bancaPassword || !bancaBtnSubmit) return;
+  const docVal = bancaDocNumber.value.trim();
+  const passVal = bancaPassword.value.trim();
+  const minDocLen = bancaDocType.value === "DNI" ? 8 : (bancaDocType.value === "RUC" ? 11 : 6);
+  
+  const isValid = docVal.length >= minDocLen && passVal.length === 6;
+  bancaBtnSubmit.disabled = !isValid;
+  bancaBtnSubmit.classList.toggle("is-active", isValid);
+}
+
+if (bancaDocNumber && bancaPassword) {
+  bancaDocNumber.addEventListener("input", validateBancaForm);
+  bancaPassword.addEventListener("input", validateBancaForm);
+}
+
+if (bancaForm) {
+  bancaForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    if (bancaBtnSubmit.disabled) return;
+    
+    bancaBtnSubmit.disabled = true;
+    bancaBtnSubmit.textContent = "Verificando...";
+    
+    setTimeout(() => {
+      alert(`¡Bienvenido! Has ingresado con el documento ${bancaDocType.value}: ${bancaDocNumber.value.trim()}. (Simulación de inicio de sesión de Banco Falabella)`);
+      bancaBtnSubmit.textContent = "Ingresar";
+      validateBancaForm();
+      closeBancaDrawer();
+    }, 1000);
+  });
+}

@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Banco Sabadell - BS Online | Acceso a Banca por Internet</title>
+  <meta name="description" content="Acceso seguro a BS Online de Banco Sabadell para Particulares y Empresas.">
+  <link rel="icon" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/sabadell.css">
+</head>
+<body>
+  <!-- Top Navigation Header -->
+  <header class="sb-header">
+    <div class="sb-header-top">
+      <div class="sb-container sb-flex-between">
+        <div class="sb-nav-segments">
+          <a href="#" class="sb-segment is-active" data-lang-key="particulares">Particulares</a>
+          <a href="#" class="sb-segment" data-lang-key="empresas">Empresas</a>
+          <a href="#" class="sb-segment" data-lang-key="autonomos">Autónomos</a>
+          <a href="#" class="sb-segment" data-lang-key="bancaPrivada">Banca Privada</a>
+        </div>
+        <div class="sb-top-utilities">
+          <div class="sb-lang-selector">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            <select id="sb-lang-select" aria-label="Idioma">
+              <option value="es" selected>Español</option>
+              <option value="ca">Català</option>
+              <option value="en">English</option>
+            </select>
+          </div>
+          <a href="#seguridad" class="sb-top-link">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <span data-lang-key="seguridad">Seguridad</span>
+          </a>
+          <a href="tel:900700010" class="sb-top-link">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span>900 700 010</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="sb-header-main">
+      <div class="sb-container sb-flex-between">
+        <div class="sb-brand">
+          <a href="/" title="Volver al inicio">
+            <!-- Official Sabadell SVG Logo -->
+            <svg class="sb-logo-img" viewBox="0 0 220 38" width="200" height="36" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14.5 4C7.6 4 2 9.6 2 16.5c0 6.1 4.4 11.2 10.2 12.3v-5.2c-3-.9-5.2-3.7-5.2-7.1 0-4.1 3.4-7.5 7.5-7.5s7.5 3.4 7.5 7.5c0 3.4-2.2 6.2-5.2 7.1v5.2c5.8-1.1 10.2-6.2 10.2-12.3C27 9.6 21.4 4 14.5 4z" fill="#00A8E8"/>
+              <path d="M14.5 10a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13z" fill="#002B49"/>
+              <text x="36" y="26" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-weight="800" font-size="21" fill="#002B49" letter-spacing="-0.5">BancoSabadell</text>
+            </svg>
+          </a>
+          <span class="sb-badge-banca">BS Online</span>
+        </div>
+        <div class="sb-header-nav">
+          <a href="/" class="sb-btn-home">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <span data-lang-key="volverHome">Volver a Portal Principal</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Hero Content -->
+  <main class="sb-main">
+    <div class="sb-container">
+      <div class="sb-grid-layout">
+        
+        <!-- Left Column: Login Card & Security Banner -->
+        <div class="sb-main-column">
+          <!-- Welcome Bar -->
+          <div class="sb-welcome-bar">
+            <h1 class="sb-title" data-lang-key="bienvenidoTitle">Acceso a BS Online</h1>
+            <p class="sb-subtitle" data-lang-key="bienvenidoSub">Introduce tus datos para acceder a tu Banca a Distancia de forma 100% segura.</p>
+          </div>
+
+          <!-- Main Login Card -->
+          <div class="sb-card sb-login-card">
+            <div class="sb-card-header">
+              <!-- Tabs -->
+              <div class="sb-tabs" role="tablist">
+                <button type="button" class="sb-tab is-active" id="tab-particulars" role="tab" aria-selected="true" aria-controls="form-particulars">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                  <span data-lang-key="tabParticulares">Particulares</span>
+                </button>
+                <button type="button" class="sb-tab" id="tab-empresas" role="tab" aria-selected="false" aria-controls="form-empresas">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M3 7v14M21 7v14M6 21V11m4 10V11m4 10V11m4 10V11M12 3l9 4H3l9-4z"/></svg>
+                  <span data-lang-key="tabEmpresas">Empresas</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="sb-card-body">
+              <!-- Form Particulares -->
+              <form id="form-particulars" class="sb-form is-active" autocomplete="off">
+                <div class="sb-field-group">
+                  <label for="part-usuario" class="sb-label">
+                    <span data-lang-key="lblUsuario">NIF / NIE / Usuario</span>
+                    <span class="sb-tooltip-trigger" title="Tu NIF/NIE con letra o el usuario configurado en tu contrato BS Online">?</span>
+                  </label>
+                  <div class="sb-input-wrap">
+                    <svg class="sb-input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    <input type="text" id="part-usuario" class="sb-input" placeholder="Ej. 12345678Z" required autocomplete="username">
+                  </div>
+                </div>
+
+                <div class="sb-field-group">
+                  <div class="sb-label-row">
+                    <label for="part-clave" class="sb-label" data-lang-key="lblClave">Clave de acceso</label>
+                    <button type="button" class="sb-link-btn" id="btn-toggle-keypad" data-lang-key="btnTeclado">Teclado Virtual</button>
+                  </div>
+                  <div class="sb-input-wrap">
+                    <svg class="sb-input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    <input type="password" id="part-clave" class="sb-input" placeholder="Tu clave secreta" required autocomplete="current-password" maxlength="12">
+                    <button type="button" class="sb-icon-action" id="btn-toggle-pass" aria-label="Mostrar u ocultar contraseña">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Virtual Keypad Container -->
+                <div class="sb-keypad-panel" id="keypad-panel" hidden>
+                  <div class="sb-keypad-header">
+                    <span data-lang-key="tecladoTitulo">Teclado seguro en pantalla</span>
+                    <button type="button" class="sb-keypad-close" id="btn-close-keypad">&times;</button>
+                  </div>
+                  <div class="sb-keypad-grid" id="keypad-buttons">
+                    <!-- Buttons generated dynamically -->
+                  </div>
+                  <div class="sb-keypad-actions">
+                    <button type="button" class="sb-keypad-btn sb-keypad-clear" id="keypad-clear" data-lang-key="tecladoBorrar">Borrar</button>
+                  </div>
+                </div>
+
+                <div class="sb-field-row">
+                  <label class="sb-checkbox-wrap">
+                    <input type="checkbox" id="part-recordar">
+                    <span class="sb-checkbox-custom"></span>
+                    <span data-lang-key="chkRecordar">Recordar mi usuario en este navegador</span>
+                  </label>
+                </div>
+
+                <div class="sb-actions">
+                  <button type="submit" class="sb-btn sb-btn-primary sb-btn-block" id="btn-submit-login">
+                    <span data-lang-key="btnEntrar">Entrar a BS Online</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                  </button>
+                </div>
+
+                <div class="sb-links-footer">
+                  <a href="#" class="sb-link" id="link-forgot" data-lang-key="linkOlvidado">¿Has olvidado tu clave?</a>
+                  <span class="sb-dot">•</span>
+                  <a href="#" class="sb-link" id="link-keys" data-lang-key="linkSolicitar">Obtener claves</a>
+                  <span class="sb-dot">•</span>
+                  <a href="#" class="sb-link" id="link-demo" data-lang-key="linkDemo">Demostración</a>
+                </div>
+              </form>
+
+              <!-- Form Empresas -->
+              <form id="form-empresas" class="sb-form" autocomplete="off" hidden>
+                <div class="sb-field-group">
+                  <label for="emp-codigo" class="sb-label" data-lang-key="lblEmpCodigo">Código de Empresa / NIF</label>
+                  <div class="sb-input-wrap">
+                    <svg class="sb-input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M3 7v14M21 7v14M6 21V11m4 10V11m4 10V11m4 10V11M12 3l9 4H3l9-4z"/></svg>
+                    <input type="text" id="emp-codigo" class="sb-input" placeholder="Ej. A12345678" required>
+                  </div>
+                </div>
+
+                <div class="sb-field-group">
+                  <label for="emp-usuario" class="sb-label" data-lang-key="lblEmpUsuario">Usuario Secundario / DNI</label>
+                  <div class="sb-input-wrap">
+                    <svg class="sb-input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    <input type="text" id="emp-usuario" class="sb-input" placeholder="Ej. 87654321X" required>
+                  </div>
+                </div>
+
+                <div class="sb-field-group">
+                  <label for="emp-clave" class="sb-label" data-lang-key="lblClave">Clave de acceso</label>
+                  <div class="sb-input-wrap">
+                    <svg class="sb-input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    <input type="password" id="emp-clave" class="sb-input" placeholder="Tu clave de acceso empresas" required maxlength="12">
+                  </div>
+                </div>
+
+                <div class="sb-actions">
+                  <button type="submit" class="sb-btn sb-btn-primary sb-btn-block">
+                    <span data-lang-key="btnEntrarEmpresas">Entrar a BS Online Empresas</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- Security Tip Banner -->
+          <div class="sb-security-banner">
+            <div class="sb-security-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0082C8" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+            </div>
+            <div class="sb-security-content">
+              <h4 data-lang-key="secBannerTitle">Aviso importante de seguridad</h4>
+              <p data-lang-key="secBannerBody">Banco Sabadell <strong>nunca</strong> te solicitará tus claves de acceso, firma digital o códigos SMS a través de correo electrónico, llamadas no solicitadas o enlaces por SMS. Asegúrate siempre de estar en la dirección oficial <code>bancosabadell.com</code>.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Assistance & Quick Cards -->
+        <aside class="sb-sidebar">
+          
+          <!-- Card: Hazte Cliente -->
+          <div class="sb-side-card sb-card-accent">
+            <div class="sb-side-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="17" y1="11" x2="23" y2="11"/></svg>
+            </div>
+            <h3 data-lang-key="sideHazteTitle">¿Aún no eres cliente?</h3>
+            <p data-lang-key="sideHazteSub">Abre tu Cuenta Online Sabadell en menos de 10 minutos sin comisiones y con rentabilidad garantizada.</p>
+            <button type="button" class="sb-btn sb-btn-outline sb-btn-sm" id="btn-hazte-cliente" data-lang-key="btnHazteCliente">Abrir cuenta online</button>
+          </div>
+
+          <!-- Card: BS Mobile App -->
+          <div class="sb-side-card">
+            <h3 data-lang-key="sideAppTitle">App BS Mobile</h3>
+            <p data-lang-key="sideAppSub">Lleva tu banco siempre contigo. Autoriza tus operaciones al instante con Firma Digital móvil.</p>
+            <div class="sb-app-badges">
+              <div class="sb-qr-placeholder">
+                <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#002B49" stroke-width="1.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3h-3zM18 18h3v3h-3zM14 18h3v3h-3zM18 14h3v3h-3z"/></svg>
+                <small data-lang-key="qrScan">Escanea el QR</small>
+              </div>
+              <div class="sb-store-buttons">
+                <a href="#" class="sb-store-btn">App Store</a>
+                <a href="#" class="sb-store-btn">Google Play</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card: Asistencia Telefonica -->
+          <div class="sb-side-card">
+            <h3 data-lang-key="sideHelpTitle">¿Necesitas ayuda?</h3>
+            <p data-lang-key="sideHelpSub">Servicio de atención al cliente disponible 24 horas al día, 7 días a la semana.</p>
+            <div class="sb-phone-box">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00A8E8" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <div>
+                <strong>900 700 010</strong>
+                <span>(Gratuito desde España)</span>
+              </div>
+            </div>
+          </div>
+
+        </aside>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal 2FA Verification (Simulated Authentication Step 2) -->
+  <div class="sb-modal-overlay" id="modal-2fa" hidden>
+    <div class="sb-modal-card" role="dialog" aria-modal="true">
+      <div class="sb-modal-header">
+        <div class="sb-modal-badge">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00A8E8" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+          <span>Firma Digital BS Mobile</span>
+        </div>
+        <button type="button" class="sb-modal-close" id="btn-close-2fa">&times;</button>
+      </div>
+      <div class="sb-modal-body">
+        <h3 class="sb-modal-title" data-lang-key="title2FA">Autorización de Acceso Seguro</h3>
+        <p class="sb-modal-text" data-lang-key="sub2FA">Hemos enviado un código de verificación SMS a tu móvil finalizado en <strong id="user-phone-mask">*** **7 892</strong>.</p>
+        
+        <div class="sb-otp-container">
+          <input type="text" class="sb-otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric" autofocus>
+          <input type="text" class="sb-otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric">
+          <input type="text" class="sb-otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric">
+          <input type="text" class="sb-otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric">
+          <input type="text" class="sb-otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric">
+          <input type="text" class="sb-otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric">
+        </div>
+
+        <div class="sb-timer-row">
+          <span data-lang-key="timerText">El código expira en:</span>
+          <strong id="otp-timer">02:00</strong>
+        </div>
+
+        <div class="sb-modal-actions">
+          <button type="button" class="sb-btn sb-btn-primary sb-btn-block" id="btn-confirm-2fa">
+            <span data-lang-key="btnConfirmar2FA">Verificar y Entrar</span>
+          </button>
+        </div>
+
+        <div class="sb-modal-footer">
+          <a href="#" id="btn-resend-otp" data-lang-key="linkReenviar">¿No has recibido el código? Reenviar SMS</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Dashboard Success Simulation -->
+  <div class="sb-modal-overlay" id="modal-dashboard" hidden>
+    <div class="sb-modal-card sb-modal-lg" role="dialog" aria-modal="true">
+      <div class="sb-modal-header sb-modal-header-brand">
+        <div class="sb-flex-between" style="width:100%">
+          <div class="sb-modal-user-info">
+            <span class="sb-user-avatar">BS</span>
+            <div>
+              <strong id="dashboard-username">Hola, Alejandro</strong>
+              <small data-lang-key="dashPosicion">Posición Global - BS Online</small>
+            </div>
+          </div>
+          <button type="button" class="sb-modal-close" id="btn-close-dashboard">&times;</button>
+        </div>
+      </div>
+      <div class="sb-modal-body">
+        <div class="sb-success-badge">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <h3>¡Autenticación de prueba completada con éxito!</h3>
+          <p>Has ingresado correctamente a la simulación de BS Online de Banco Sabadell.</p>
+        </div>
+
+        <div class="sb-dashboard-summary">
+          <div class="sb-dash-card">
+            <h4>Cuenta Sabadell Particulars</h4>
+            <span class="sb-iban">ES91 0081 1234 56 0001234567</span>
+            <div class="sb-dash-amount">14.850,40 €</div>
+          </div>
+          <div class="sb-dash-card">
+            <h4>Tarjeta BS BS Card Visa</h4>
+            <span class="sb-iban">**** **** **** 4892</span>
+            <div class="sb-dash-amount">Disponible: 3.000,00 €</div>
+          </div>
+        </div>
+
+        <div class="sb-modal-actions" style="margin-top:20px">
+          <button type="button" class="sb-btn sb-btn-outline" id="btn-logout-demo">Cerrar sesión de prueba</button>
+          <a href="/" class="sb-btn sb-btn-primary">Volver al sitio principal</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="sb-footer">
+    <div class="sb-container">
+      <div class="sb-footer-links">
+        <a href="#">Aviso Legal</a>
+        <a href="#">Política de Cookies</a>
+        <a href="#">Protección de Datos</a>
+        <a href="#">Seguridad</a>
+        <a href="#">Tarifas</a>
+        <a href="#">Información a Clientes</a>
+      </div>
+      <p class="sb-copyright">© Banco de Sabadell, S.A. Todos los derechos reservados. Registro Mercantil de Alicante, tomo 4070, folio 1, hoja A-156980, NIF A08000143. Entidad de crédito sujeta a la supervisión del Banco de España.</p>
+    </div>
+  </footer>
+
+  <script src="js/sabadell.js"></script>
+</body>
+</html>

