@@ -294,19 +294,9 @@ if (bancaForm) {
     
     bancaBtnSubmit.disabled = true;
     
-    // Show center screen loading overlay with Banco Falabella logo
+    // Show center screen loading overlay with Banco Falabella logo indefinitely
     if (bancaLoadingOverlay) {
       bancaLoadingOverlay.hidden = false;
     }
-    
-    setTimeout(() => {
-      if (bancaLoadingOverlay) {
-        bancaLoadingOverlay.hidden = true;
-      }
-      
-      alert(`¡Bienvenido! Has ingresado con el documento ${bancaDocType.value}: ${bancaDocNumber.value.trim()}. (Simulación de inicio de sesión de Banco Falabella)`);
-      validateBancaForm();
-      closeBancaDrawer();
-    }, 1800);
   });
 }
